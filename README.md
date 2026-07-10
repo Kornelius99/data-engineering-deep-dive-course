@@ -34,13 +34,13 @@ pip install -r requirements.txt
 
 Then start at modules/00-setup/README.md and work through the modules in order - each one builds on artifacts produced by the previous one (module 2's DAG orchestrates module 1's ingestion script, module 4's dbt models read module 3's warehouse tables, and so on).
 
-## Running the whole thing end-to-end
+## Running the shared infrastructure
 
 ```bash
-docker compose up --build
+docker compose up -d
 ```
 
-This starts Postgres (the warehouse), Airflow, and a small metrics/logs viewer, wired together the way modules 02-06 describe individually. See [modules/07-deployment](modules/07-deployment) for how to take this further, to a real deployment.
+This starts Postgres (the warehouse) and Airflow, matching what modules 00-03 assume is running. Modules 04-06 (dbt, data quality checks, logging/metrics) run as plain Python/CLI commands against that infrastructure rather than as their own containers - see each module's own README for its exact run command. See [modules/07-deployment](modules/07-deployment) for taking this further, to a real deployment reachable over the internet.
 
 ## Honesty / limitations
 
