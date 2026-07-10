@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: stg_weather
+    columns:
+      - name: weather_fact_id
+        tests: [unique, not_null]
+      - name: city_id
+        tests: [not_null]
+
+  - name: fct_daily_weather
+    columns:
+      - name: city_id
+        tests: [not_null]
+      - name: observed_date
+        tests: [not_null]
+      - name: avg_temperature_c
+        tests: [not_null]
